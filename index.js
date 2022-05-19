@@ -224,15 +224,19 @@
     var key = keys(element);
     var value = [];
     var length = key.length;
-
-    for (var i = 0; i < length; i++) {
-      value[i] = element[key[i]];
-      delete element[key[i]];
+    
+    if(element.tagName !== "SELECT"){
+      for (var i = 0; i < length; i++) {
+        value[i] = element[key[i]];
+        delete element[key[i]];
+      }
     }
 
     return function () {
-      for (var _i = 0; _i < length; _i++) {
-        element[key[_i]] = value[_i];
+      if(element.tagName !== "SELECT"){
+        for (var _i = 0; _i < length; _i++) {
+          element[key[_i]] = value[_i];
+        }
       }
     };
   };
